@@ -2,6 +2,15 @@ import React from 'react';
 import { Avatar, TextStyle, Heading, Card, ResourceItem, ResourceList, Button } from '@shopify/polaris';
 
 export default class App extends React.Component {
+    constructor(){
+        super()
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick = (item) => {
+        this.props.removeNomination(item)
+    }
+
     render() {
         return (
             <div className="resultsTab">
@@ -9,39 +18,21 @@ export default class App extends React.Component {
 
                 <Card>
                     <ResourceList
-                        className="resourceList"
                         resourceName={{ singular: 'customer', plural: 'customers' }}
-                        items={[
-                            {
-                                id: 341,
-                                url: 'customers/341',
-                                name: 'Mae Jemison',
-                                location: 'Decatur, USA',
-                            },
-                            {
-                                id: 256,
-                                url: 'customers/256',
-                                name: 'Ellen Ochoa',
-                                location: 'Los Angeles, USA',
-                            },
-                        ]}
+                        items={this.props.nominations}
                         renderItem={(item) => {
-                            const { id, url, name, location } = item;
-                            const media = <Avatar customer size="medium" name={name} />;
-                
+                            const { Title, Year, imbdID } = item;
 
                             return (
                                 <div id="searchResult">
-                                    <Button className="deleteNomination">Delete</Button>
+                                    <Button className="deleteNomination" onClick={() => this.handleClick(item)}>Remove Nomination</Button>
                                     <ResourceItem
-                                        id={id}
-                                        url={url}
-                                        accessibilityLabel={`View details for ${name}`}
+                                        id={imbdID}
+                                        url={"https://www.imdb.com/title/" + imbdID}
                                     >
                                         <h3>
-                                            <TextStyle variation="strong">{name}</TextStyle>
+                                            <TextStyle variation="strong">{Title + "(" + Year + ")"}</TextStyle>
                                         </h3>
-                                        <div>{location}</div>
                                     </ResourceItem>
                                 </div>
                             );

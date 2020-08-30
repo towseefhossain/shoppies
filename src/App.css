@@ -57,10 +57,12 @@
 }
 
 .content-wrap {
-  display: flex;
+  display: inline-block;
+  width: 80%;
   flex-direction: row;
   align-items: center;
   justify-content: center !important;
+  vertical-align: top;
 }
 
 #searchResult {
@@ -77,6 +79,9 @@
 }
 
 .resultsTab {
+  display: inline-block;
+  vertical-align: top;
+  width: 40%;
   margin: 25px;
 }
 

@@ -1,16 +1,28 @@
-import React, {useCallback, useState} from 'react';
+import React, {setState} from 'react';
 import {TextField, Button} from '@shopify/polaris';
 
-export default function SearchBar() {
-  const [value, setValue] = useState('Jaded Pixel');
+export default class SearchBar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value : ''
+        }
+        this.handleClick = this.handleClick.bind(this)
+    }
 
-  const handleChange = useCallback((newValue) => setValue(newValue), []);
-  const searchButton = useCallback((searchKey) => console.log(searchKey), []);
 
-  return (
-      <div id="search">
-          <TextField id="searchBar" value={value} onChange={handleChange} clearButton/>
-          <Button id="submitSearch" onClick={searchButton(value)}>Search</Button>
-      </div>
-  ); 
+    handleClick = () => {
+        this.props.setResults(this.state.value);
+    }
+
+    render() {
+        return (
+            <div id="search">
+                <TextField value={this.state.value} placeholder={'Search'} id="searchBar" onChange={e => {this.setState({value : e})}} clearButton/>
+                <Button id="submitSearch" onClick={this.handleClick}>Search</Button>
+            </div>
+        ); 
+    }
+
+  
 }

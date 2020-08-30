@@ -1,45 +1,39 @@
 import React from 'react';
-import { Avatar, Heading, TextStyle, Card, ResourceItem, ResourceList, Button } from '@shopify/polaris';
+import { Heading, TextStyle, Card, ResourceItem, ResourceList, Button } from '@shopify/polaris';
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this)
+    }
+
+    handleClick = (item) => {
+        this.props.addNomination(item)
+    }
+
     render() {
         return (
             <div className="resultsTab">
                 <Heading className="sectionLabel" element="h1">Search Results</Heading>
 
                 <Card>
+
                     <ResourceList
                         resourceName={{ singular: 'customer', plural: 'customers' }}
-                        items={[
-                            {
-                                id: 341,
-                                url: 'customers/341',
-                                name: 'Mae Jemison',
-                                location: 'Decatur, USA',
-                            },
-                            {
-                                id: 256,
-                                url: 'customers/256',
-                                name: 'Ellen Ochoa',
-                                location: 'Los Angeles, USA',
-                            },
-                        ]}
+                        items={this.props.results}
                         renderItem={(item) => {
-                            const { id, url, name, location } = item;
-                            const media = <Avatar customer size="medium" name={name} />;
+                            const { Title, Year, imdbID } = item;
 
                             return (
                                 <div id="searchResult">
-                                    <Button className="deleteNomination">Add Nomination</Button>
+                                    <Button disabled={this.props.shouldDisableAddButton(item)} onClick={() => this.handleClick(item)} className="deleteNomination">Add Nomination</Button>
                                     <ResourceItem
-                                        id={id}
-                                        url={url}
-                                        accessibilityLabel={`View details for ${name}`}
+                                        id={imdbID}
+                                        url={"https://www.imdb.com/title/"+imdbID}
                                     >
                                         <h3>
-                                            <TextStyle variation="strong">{name}</TextStyle>
+                                            <TextStyle variation="strong">{Title + "(" + Year + ")"}</TextStyle>
                                         </h3>
-                                        <div>{location}</div>
                                     </ResourceItem>
                                 </div>
                             );
