@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { setState } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar'
 import SearchResults from './components/SearchResults'
@@ -33,19 +33,25 @@ class App extends React.Component {
     this.shouldDisableAddButton = this.shouldDisableAddButton.bind(this)
     this.shouldShowAlert = this.shouldShowAlert.bind(this)
     this.setResults = this.setResults.bind(this)
+    this.checkForBadQuery = this.checkForBadQuery.bind(this)
+  }
+
+  checkForBadQuery(response) {
+    if (response.Response === "False") {
+      throw ("Bad Request Error")
+    }
+    return response
   }
 
   setResults(results) {
-    fetch(API + "&s=" + escape(results) + "&type=movie")
+    let searchQuery = API + "&s=" + escape(results) + "&type=movie"
+    fetch(searchQuery)
       .then(response => response.json())
-      .then(response => {
-        if (response.Response === "False") {
-          throw new Error("Bad Request Error")
-        }
+      .then(response => this.checkForBadQuery(response))
+      .then(data => {
+        this.setState({ searchresults: data.Search })
       })
-      .then(data => this.setState({ searchresults: data.Search }))
       .catch(error => {
-        console.log(error)
         this.setState(
           {
             searchresults: noResults
