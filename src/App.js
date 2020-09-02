@@ -7,7 +7,7 @@ import Alert from './components/Alert';
 import { AppProvider } from "@shopify/polaris";
 import en from '@shopify/polaris/locales/en.json';
 
-const API = "https://www.omdbapi.com/?apikey=b83a24c7"
+const API = "//www.omdbapi.com/?apikey=b83a24c7"
 
 const noResults = [
   {
@@ -40,10 +40,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(response => {
         if (response.Response === "False") {
-          throw Object.assign(
-            new Error("Bad Request Error"),
-            { code: 403 }
-          )
+          throw new Error("Bad Request Error")
         }
       })
       .then(data => this.setState({ searchresults: data.Search }))
