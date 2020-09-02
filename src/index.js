@@ -2,13 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {AppProvider} from "@shopify/polaris";
 import * as serviceWorker from './serviceWorker';
-import en from '@shopify/polaris/locales/en.json';
 
 ReactDOM.render(
   <React.StrictMode>
-<AppProvider i18n={en}><App /></AppProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

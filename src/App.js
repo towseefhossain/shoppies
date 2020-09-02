@@ -4,6 +4,8 @@ import SearchBar from './components/SearchBar'
 import SearchResults from './components/SearchResults'
 import Nominations from './components/Nominations'
 import Alert from './components/Alert';
+import { AppProvider } from "@shopify/polaris";
+import en from '@shopify/polaris/locales/en.json';
 
 const API = "http://www.omdbapi.com/?apikey=b83a24c7"
 
@@ -84,14 +86,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App" >
-        <SearchBar setResults={this.setResults} />
-        <div className="content-wrap">
-          <SearchResults results={this.state.searchresults} addNomination={this.addNomination} shouldDisableAddButton={this.shouldDisableAddButton} />
-          <Nominations nominations={this.state.nominations} removeNomination={this.removeNomination} />
+      <AppProvider i18n={en}>
+        <div className="App" >
+          <SearchBar setResults={this.setResults} />
+          <div className="content-wrap">
+            <SearchResults results={this.state.searchresults} addNomination={this.addNomination} shouldDisableAddButton={this.shouldDisableAddButton} />
+            <Nominations nominations={this.state.nominations} removeNomination={this.removeNomination} />
+          </div>
+          <Alert shouldShowAlert={this.state.nominations.length} />
         </div>
-        <Alert shouldShowAlert={this.state.nominations.length} />
-      </div>
+      </AppProvider>
     );
   }
 
