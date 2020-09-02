@@ -2,6 +2,12 @@
 
 Shopify UX Developer Intern & Web Developer Intern Challenge - Winter 2021
 
+[Doc for the Challenge](https://docs.google.com/document/d/1AZO0BZwn1Aogj4f3PDNe1mhq8pKsXZxtrG--EIbP_-w/edit#heading=h.31w9woubunro)
+
+Bonus features:
+1. Query handling (users cannot type in bad queries)
+2. Unit testing
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
