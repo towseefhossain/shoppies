@@ -1,4 +1,4 @@
-import React, { setState } from 'react';
+import React from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar'
 import SearchResults from './components/SearchResults'
@@ -7,7 +7,7 @@ import Alert from './components/Alert';
 import { AppProvider } from "@shopify/polaris";
 import en from '@shopify/polaris/locales/en.json';
 
-const API = "http://www.omdbapi.com/?apikey=b83a24c7"
+const API = "https://www.omdbapi.com/?apikey=b83a24c7"
 
 const noResults = [
   {
@@ -39,8 +39,11 @@ class App extends React.Component {
     fetch(API + "&s=" + escape(results) + "&type=movie")
       .then(response => response.json())
       .then(response => {
-        if (response.Response == "False") {
-          throw ("Bad Request Error")
+        if (response.Response === "False") {
+          throw Object.assign(
+            new Error("Bad Request Error"),
+            { code: 403 }
+          )
         }
       })
       .then(data => this.setState({ searchresults: data.Search }))
@@ -71,7 +74,7 @@ class App extends React.Component {
   }
 
   shouldDisableAddButton(item) {
-    return ((this.state.nominations.indexOf(item) > -1) || (this.state.nominations.length >= 5) || item.imdbID == "404")
+    return ((this.state.nominations.indexOf(item) > -1) || (this.state.nominations.length >= 5) || item.imdbID === "404")
   }
 
   shouldShowAlert() {

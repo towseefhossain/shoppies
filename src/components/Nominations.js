@@ -1,8 +1,8 @@
 import React from 'react';
-import { Avatar, TextStyle, Heading, Card, ResourceItem, ResourceList, Button } from '@shopify/polaris';
+import { TextStyle, Heading, Card, ResourceItem, ResourceList, Button } from '@shopify/polaris';
 
 export default class App extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.handleClick = this.handleClick.bind(this)
     }

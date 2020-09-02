@@ -1,23 +1,23 @@
-import React, { useCallback, useState } from 'react';
-import { Button, TextContainer, Modal } from '@shopify/polaris';
+import React from 'react';
+import { TextContainer, Modal } from '@shopify/polaris';
 
 export default class Alert extends React.Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
-            alreadyShown : false,
-            open : false
+            alreadyShown: false,
+            open: false
         }
     }
 
-    componentDidUpdate(){
-        if ((this.props.shouldShowAlert === 5) && (this.state.open == false) && (this.state.alreadyShown == false)) {
+    componentDidUpdate() {
+        if ((this.props.shouldShowAlert === 5) && (this.state.open === false) && (this.state.alreadyShown === false)) {
             this.setState({
                 open: true,
                 alreadyShown: true
             })
         }
-        else if ((this.props.shouldShowAlert < 5) && (this.state.alreadyShown == true)) {
+        else if ((this.props.shouldShowAlert < 5) && (this.state.alreadyShown === true)) {
             this.setState({
                 open: false,
                 alreadyShown: false
@@ -40,8 +40,7 @@ export default class Alert extends React.Component {
                 <Modal.Section>
                     <TextContainer>
                         <p>
-                            You've added 5 nominations! You can now submit your nominations and see the leaderboards, 
-                            or go back and change your selections.
+                            You've added 5 nominations! You can go back and change your selections.
             </p>
                     </TextContainer>
                 </Modal.Section>
