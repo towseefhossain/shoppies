@@ -96,10 +96,23 @@
 
 #alert-banner {
   position: absolute;
-  left: 25%;  
-  right: 25%;  
-  top: 25%;  
-  bottom: 25%;  
-  margin: auto;  
-  border-radius: 20px; 
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.leaderboard {
+  justify-content: center;
+  width: 40%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.leaderboardLabel {
+  text-align: center !important;
 }
