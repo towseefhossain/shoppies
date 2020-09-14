@@ -1,7 +1,9 @@
 import React from 'react';
 import { TextContainer, Modal } from '@shopify/polaris';
+import API from '../utils/API'
+import { withRouter } from 'react-router-dom';
 
-export default class Alert extends React.Component {
+class Alert extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -26,6 +28,18 @@ export default class Alert extends React.Component {
     }
 
     handleChange = () => {
+        API.saveMovies(this.props.nominations)
+            .then(() => {
+                console.log("POST SUCCESS");
+            })
+            .catch(err => console.log(err));
+        this.setState({
+            open: false
+        })
+        this.props.history.push('/leaderboards')
+    }
+
+    handleClose = () => {
         this.setState({
             open: false
         })
@@ -33,10 +47,15 @@ export default class Alert extends React.Component {
 
     render() {
         return <div style={{ height: '500px' }}>
-            <Modal onClose={this.handleChange} title="Nomination Selections Complete" primaryAction={{
-                content: 'Close',
+            <Modal onClose={this.handleClose} title="Nomination Selections Complete" secondaryActions={{
+                content: 'Submit',
                 onAction: this.handleChange
-            }} open={this.state.open}>
+            }}
+                primaryAction={{
+                    content: 'Edit Nominations',
+                    onAction: this.handleClose
+                }}
+                open={this.state.open}>
                 <Modal.Section>
                     <TextContainer>
                         <p>
@@ -49,3 +68,5 @@ export default class Alert extends React.Component {
     }
 
 }
+
+export default withRouter(Alert)

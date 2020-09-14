@@ -1,4 +1,5 @@
 import React, { setState } from 'react';
+import { withRouter } from 'react-router-dom'
 import './App.css';
 import SearchBar from './components/SearchBar'
 import SearchResults from './components/SearchResults'
@@ -6,6 +7,7 @@ import Nominations from './components/Nominations'
 import Alert from './components/Alert';
 import { AppProvider } from "@shopify/polaris";
 import en from '@shopify/polaris/locales/en.json';
+import Submit from './components/Submit';
 
 const API = "//www.omdbapi.com/?apikey=b83a24c7"
 
@@ -95,11 +97,12 @@ class App extends React.Component {
       <AppProvider i18n={en}>
         <div className="App" >
           <SearchBar setResults={this.setResults} />
+          <Submit nominations={this.state.nominations} />
           <div className="content-wrap">
             <SearchResults results={this.state.searchresults} addNomination={this.addNomination} shouldDisableAddButton={this.shouldDisableAddButton} />
             <Nominations nominations={this.state.nominations} removeNomination={this.removeNomination} />
           </div>
-          <Alert shouldShowAlert={this.state.nominations.length} />
+          <Alert shouldShowAlert={this.state.nominations.length} nominations={this.state.nominations} />
         </div>
       </AppProvider>
     );
@@ -107,4 +110,4 @@ class App extends React.Component {
 
 }
 
-export default App;
+export default withRouter(App);
