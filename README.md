@@ -9,7 +9,11 @@ Bonus features:
 2. Unit testing for components
 3. :new: Leaderboard, persists all submitted nominations
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was built on the MERN stack.
+[MongoDB](https://www.mongodb.com/)
+[Express](https://expressjs.com/)
+[NodeJS](https://nodejs.org/)
+[ReactJS](https://reactjs.org/)
 
 ## Available Scripts
 
