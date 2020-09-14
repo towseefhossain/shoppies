@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cd client/ && npm run build && cd ../ && node server.js",
     "server": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "npm install && cd client/ && npm install && cd .. && npm start"
   },
   "keywords": [],
   "license": "MIT",
