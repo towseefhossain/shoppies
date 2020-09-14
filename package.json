@@ -12,6 +12,7 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.20.0",
     "express": "^4.16.3",
     "mongoose": "^5.3.2"
   },
